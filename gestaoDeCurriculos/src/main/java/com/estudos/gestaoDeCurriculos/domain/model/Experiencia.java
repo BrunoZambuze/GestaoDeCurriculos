@@ -13,6 +13,7 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Experiencia {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     @NotNull
@@ -27,8 +28,11 @@ public class Experiencia {
     @NotNull
     private OffsetDateTime dataInicio;
 
+    private OffsetDateTime dataFim;
+
     @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "fk_id_candidato", nullable = false)
     private Candidato candidato;
 
 }

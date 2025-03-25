@@ -1,8 +1,6 @@
 package com.estudos.gestaoDeCurriculos.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,9 +10,21 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Curriculo {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @NotNull
     private Long id;
+
+    @Lob
+    private byte[] arquivo; //Armazena o arquivo em formato binário
+
+    private String nomeArquivo;
+
+    private String tipoArquivo; //Ex: application/pdf
+
+    @OneToOne
+    @JoinColumn(name = "fk_id_candidato", nullable = false)
+    private Candidato candidato;
 
 }

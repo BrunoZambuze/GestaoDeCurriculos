@@ -15,6 +15,7 @@ import java.time.OffsetDateTime;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     @EqualsAndHashCode.Include

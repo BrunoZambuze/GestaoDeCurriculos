@@ -1,9 +1,7 @@
 package com.estudos.gestaoDeCurriculos.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -14,11 +12,14 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id")
 public class Candidato extends Usuario{
 
-    @OneToMany(mappedBy = "id")
+    @NotBlank
+    private String areaAtuacao;
+
+    @OneToMany(mappedBy = "candidato", orphanRemoval = true)
     private List<Experiencia> experienciaLista;
 
     @NotNull
-    @OneToOne(mappedBy = "id")
+    @OneToOne(mappedBy = "candidato", cascade = CascadeType.ALL, orphanRemoval = true)
     private Curriculo curriculo;
 
 }
